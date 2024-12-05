@@ -1,0 +1,160 @@
+{
+  "name": "v3-electron-vite",
+  "version": "4.3.0",
+  "description": "v3-electron-client",
+  "author": "nevlf<2863180001@qq.com>",
+  "main": "dist/index.js",
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "env": {
+    "host": "127.0.0.1",
+    "port": 13333
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build && electron-builder",
+    "build:dir": "vite build && electron-builder --dir",
+    "build:linux": "vite build && electron-builder --linux",
+    "build:macos": "vite build && electron-builder --macos",
+    "build:win-x64": "vite build && electron-builder --win --x64",
+    "build:win-x32": "vite build && electron-builder --win --ia32",
+    "lint:eslint": "eslint --cache --max-warnings 0 \"{script,src,types}/**/*.{vue,js,jsx,ts,tsx}\" --fix",
+    "lint:prettier": "prettier --write \"{script,src,types}/**/*.{vue,js,jsx,ts,tsx,json,css,less,scss,html,md}\"",
+    "lint": "pnpm lint:eslint && pnpm lint:prettier",
+    "prepare": "husky install"
+  },
+  "build": {
+    "productName": "v3-electron-vite",
+    "appId": "com.app.v3-electron-vite",
+    "directories": {
+      "output": "release/v${version}_${platform}",
+      "buildResources": "buildResources"
+    },
+    "extraResources": [],
+    "files": [
+      "dist/**/*",
+      "static/**/*",
+      ".env",
+      "resources/ffmpeg/ffmpeg.exe",
+      "resources/setup Virtual Audio Capture Grabber v0.4.6.exe"
+    ],
+    "publish": [
+      {
+        "provider": "generic",
+        "url": ""
+      }
+    ],
+    "asar": true,
+    "nsis": {
+      "oneClick": false,
+      "perMachine": true,
+      "shortcutName": "${productName}",
+      "uninstallDisplayName": "${productName}",
+      "runAfterFinish": true,
+      "deleteAppDataOnUninstall": true,
+      "allowToChangeInstallationDirectory": true
+    },
+    "win": {
+      "icon": "static/icons/logo_256x256.ico",
+      "artifactName": "${productName} v${version} ${arch}.${ext}",
+      "requestedExecutionLevel": "requireAdministrator"
+    },
+    "dmg": {
+      "sign": false
+    },
+    "mac": {
+      "target": [
+        "dmg",
+        "zip"
+      ],
+      "icon": "static/icons/logo_256x256.icns",
+      "artifactName": "${productName} v${version} mac ${arch}.${ext}",
+      "identity": null,
+      "hardenedRuntime": true,
+      "gatekeeperAssess": false
+    },
+    "linux": {
+      "target": [
+        "AppImage",
+        "deb"
+      ],
+      "icon": "static/icons/logo_256x256.png",
+      "artifactName": "${productName} v${version} ${platform} ${arch}.${ext}",
+      "desktop": {
+        "Icon": "/opt/v3-electron-vite/resources/app/static/icons/logo_256x256.png"
+      }
+    }
+  },
+  "dependencies": {
+    "@electron/remote": "2.1.1",
+    "@element-plus/icons-vue": "2.3.1",
+    "axios": "1.6.3",
+    "dayjs": "1.11.10",
+    "dotenv": "16.3.1",
+    "electron-log": "5.0.2",
+    "element-plus": "2.4.4",
+    "lodash-es": "4.17.21",
+    "mitt": "3.0.1",
+    "normalize.css": "8.0.1",
+    "nprogress": "0.2.0",
+    "path-browserify": "1.0.1",
+    "path-to-regexp": "6.2.1",
+    "pinia": "2.1.7",
+    "screenfull": "6.0.2",
+    "vue": "3.3.13",
+    "vue-router": "4.2.5",
+    "vxe-table": "4.4.1",
+    "vxe-table-plugin-element": "3.0.7",
+    "xe-utils": "3.5.11"
+  },
+  "devDependencies": {
+    "@types/lodash-es": "4.17.12",
+    "@types/node": "20.10.5",
+    "@types/nprogress": "0.2.3",
+    "@types/path-browserify": "1.0.2",
+    "@typescript-eslint/eslint-plugin": "6.16.0",
+    "@typescript-eslint/parser": "6.16.0",
+    "@vitejs/plugin-vue": "5.0.0",
+    "@vitejs/plugin-vue-jsx": "3.1.0",
+    "@vue/eslint-config-prettier": "8.0.0",
+    "@vue/eslint-config-typescript": "12.0.0",
+    "electron": "28.1.0",
+    "electron-builder": "24.9.1",
+    "eslint": "8.56.0",
+    "eslint-plugin-prettier": "5.1.2",
+    "eslint-plugin-vue": "9.19.2",
+    "husky": "8.0.3",
+    "lint-staged": "15.2.0",
+    "prettier": "3.1.1",
+    "sass": "1.69.5",
+    "typescript": "5.3.3",
+    "unocss": "0.58.2",
+    "vite": "5.0.10",
+    "vite-electron-plugin": "0.8.3",
+    "vite-plugin-svg-icons": "2.0.1",
+    "vite-svg-loader": "5.1.0",
+    "vue-eslint-parser": "9.3.2",
+    "vue-tsc": "1.8.27"
+  },
+  "lint-staged": {
+    "*.{vue,js,jsx,ts,tsx}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.{css,less,scss,html,md}": [
+      "prettier --write"
+    ],
+    "package.json": [
+      "prettier --write"
+    ]
+  },
+  "keywords": [
+    "vue3",
+    "vite",
+    "electron",
+    "pinia",
+    "rollup"
+  ],
+  "license": "MIT"
+}

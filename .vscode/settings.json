@@ -1,0 +1,4 @@
+{
+  "editor.formatOnSave": true, // 开启文件保存时自动格式化
+  "prettier.useEditorConfig": false // 只是用 prettier 的代码风格
+}
